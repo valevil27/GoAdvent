@@ -8,9 +8,9 @@ import (
 )
 
 type Test struct {
-	expected uint64
+	expected int64
 	input    string
-	function func(string) uint64
+	function func(string) int64
 }
 
 func TestSolution(t *testing.T) {
@@ -19,6 +19,11 @@ func TestSolution(t *testing.T) {
 			expected: 114,
 			input:    "test-input",
 			function: day09.Part1,
+		},
+		{
+			expected: 2,
+			input:    "test-input",
+			function: day09.Part2,
 		},
 	}
 	for _, test := range tests {

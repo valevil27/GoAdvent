@@ -3,6 +3,7 @@ package day09
 import (
 	"fmt"
 	"os"
+	"slices"
 	"strconv"
 	"strings"
 )
@@ -22,21 +23,33 @@ func getInput(filepath string) string {
 	return string(file)
 }
 
-func Part1(filepath string) uint64 {
+func Part1(filepath string) int64 {
 	input := getInput(filepath)
 	histories := parseInput(input)
 	// For history get the result
 	sum := 0
 	for _, h := range histories {
-		fmt.Printf("h: %v\n", h)
 		fs := getFullStory(h)
-		fmt.Printf("fs: %v\n", fs)
 		ll := getForecast(fs)
-		fmt.Printf("ll: %v\n", ll)
 		sum += ll
 	}
 	// sum the results
-	return uint64(sum)
+	return int64(sum)
+}
+
+func Part2(filepath string) int64 {
+	input := getInput(filepath)
+	histories := parseInput(input)
+	// For history get the result
+	sum := 0
+	for _, h := range histories {
+		slices.Reverse(h)
+		fs := getFullStory(h)
+		ll := getForecast(fs)
+		sum += ll
+	}
+	// sum the results
+	return int64(sum)
 }
 
 func parseInput(input string) [][]int {
@@ -94,9 +107,4 @@ func getForecast(full []int) int {
 		sum += i
 	}
 	return sum
-}
-
-func Part2(filepath string) uint64 {
-	// input := getInput(filepath)
-	return uint64(0)
 }

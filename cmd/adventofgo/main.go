@@ -7,7 +7,6 @@ import (
 )
 
 func main() {
-
 	fmt.Println("Hello world!")
 	day09.Solve()
 }
