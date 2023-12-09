@@ -1,4 +1,4 @@
-package aoc2023
+package day07
 
 import (
 	"bufio"
