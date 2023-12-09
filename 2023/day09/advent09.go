@@ -8,7 +8,7 @@ import (
 )
 
 func Solve() {
-	inputFile := "./2023/day08/input"
+	inputFile := "./2023/day09/input"
 	fmt.Printf("inputFile: %v\n", inputFile)
 	fmt.Printf("Part1(inputFile): %v\n", Part1(inputFile))
 	fmt.Printf("Part2(inputFile): %v\n", Part2(inputFile))
@@ -76,11 +76,11 @@ func isLastIncrement(h []int) bool {
 	return true
 }
 
-func getFullStory(h []int) [][]int {
-	full := [][]int{}
+func getFullStory(h []int) []int {
+	full := []int{}
 	current := h
 	for {
-		full = append(full, current)
+		full = append(full, current[len(current)-1])
 		current = getIncreasingPattern(current)
 		if isLastIncrement(current) {
 			return full
@@ -88,12 +88,12 @@ func getFullStory(h []int) [][]int {
 	}
 }
 
-func getForecast(full [][]int) int {
-	ll := 0
-	for i := len(full) - 1; i >= 0; i-- {
-		ll += full[i][len(full[i])-1]
+func getForecast(full []int) int {
+	sum := 0
+	for _, i := range full {
+		sum += i
 	}
-	return ll
+	return sum
 }
 
 func Part2(filepath string) uint64 {
