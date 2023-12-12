@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"strings"
 
-	math_utils "github.com/valevil27/adventofgo/utils"
+	math_utils "github.com/valevil27/adventofgo/utils/math"
 )
 
 func Solve() {
