@@ -1,6 +1,7 @@
 package day10_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -25,8 +26,23 @@ func TestSolution(t *testing.T) {
 			input:    "test-input2",
 			function: day10.Part1,
 		},
+		{
+			expected: 4,
+			input:    "test-input3",
+			function: day10.Part2,
+		},
+		{
+			expected: 8,
+			input:    "test-input4",
+			function: day10.Part2,
+		},
+		{
+			expected: 10,
+			input:    "test-input5",
+			function: day10.Part2,
+		},
 	}
-	for _, test := range tests {
-		assert.Equal(t, test.expected, test.function(test.input))
+	for i, test := range tests {
+		assert.Equal(t, test.expected, test.function(test.input), fmt.Sprintf("Test #%v failed.\n", i+1))
 	}
 }

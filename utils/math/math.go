@@ -23,7 +23,3 @@ func Gcd(a, b int) int {
 	}
 	return a
 }
-
-func PicksTheorem(interior, boundary float64) float64 {
-	return interior + (boundary / 2.0) - 1
-}
