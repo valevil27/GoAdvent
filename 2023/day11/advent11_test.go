@@ -21,6 +21,16 @@ func TestSolution(t *testing.T) {
 			input:    "test-input",
 			function: day11.Part1,
 		},
+		// {
+		// 	expected: 1030,
+		// 	input:    "test-input",
+		// 	function: day11.Part2,
+		// },
+		// {
+		// 	expected: 8410,
+		// 	input:    "test-input",
+		// 	function: day11.Part2,
+		// },
 	}
 	for i, test := range tests {
 		assert.Equal(t, test.expected, test.function(test.input), fmt.Sprintf("Test #%v failed.\n", i+1))

@@ -32,14 +32,14 @@ func Part1(filepath string) int64 {
 	for y, row := range splitInput {
 		for x, ch := range row {
 			if ch == '#' {
-				universe = append(universe, &Galaxy{n: nGalaxy, x: x, y: y})
+				universe = append(universe, &Galaxy{n: nGalaxy, x: int64(x), y: int64(y)})
 				nGalaxy++
 			}
 		}
 	}
 	// 1 - Perform expansions, order doesn't really matter
 	// 1a - rows
-	y := 0
+	var y int64 = 0
 	for _, row := range splitInput {
 		if !strings.Contains(row, "#") {
 			for _, g := range universe {
@@ -52,7 +52,7 @@ func Part1(filepath string) int64 {
 		y++
 	}
 	// 1b - cols
-	x := 0
+	var x int64 = 0
 	for c := range splitInput[0] {
 		col := ""
 		for _, row := range splitInput {
@@ -83,10 +83,65 @@ func Part1(filepath string) int64 {
 
 type Galaxy struct {
 	n    int
-	x, y int
+	x, y int64
 }
 
 func Part2(filepath string) int64 {
-	// input := getInput(filepath)
-	return 0
+	input := getInput(filepath)
+	// 2 - For all rows and cols
+	// 2a - Find Galaxies -> Array
+	universe := []*Galaxy{}
+	nGalaxy := 1
+	splitInput := strings.Split(input, "\n")
+	for y, row := range splitInput {
+		for x, ch := range row {
+			if ch == '#' {
+				universe = append(universe, &Galaxy{n: nGalaxy, x: int64(x), y: int64(y)})
+				nGalaxy++
+			}
+		}
+	}
+	// 1 - Perform expansions, order doesn't really matter
+	// 1a - rows
+	var multiplyer int64 = 1_000_000
+	var y int64 = 0
+	for _, row := range splitInput {
+		if !strings.Contains(row, "#") {
+			for _, g := range universe {
+				if g.y > y {
+					g.y += multiplyer - 1
+				}
+			}
+			y += multiplyer - 1
+		}
+		y += 1
+	}
+	// 1b - cols
+	var x int64 = 0
+	for c := range splitInput[0] {
+		col := ""
+		for _, row := range splitInput {
+			col += string(row[c])
+		}
+		if !strings.Contains(col, "#") {
+			for _, g := range universe {
+				if g.x > x {
+					g.x += multiplyer - 1
+				}
+			}
+			x += multiplyer - 1
+		}
+		x += 1
+	}
+	sumDiffs := 0.
+	for i, g := range universe {
+		for _, g2 := range universe[i+1:] {
+			currDiff := math.Abs(float64(g.x)-float64(g2.x)) + math.Abs(float64(g.y)-float64(g2.y))
+			sumDiffs += currDiff
+		}
+	}
+
+	// 3 - For each galaxy, find its distance to others
+
+	return int64(sumDiffs)
 }
